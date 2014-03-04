@@ -1,0 +1,33 @@
+{
+  "name": "gleaner-collector-server",
+  "preferGlobal": false,
+  "version": "0.1.2",
+  "author": {
+    "name": "Pedro Rodriguez",
+    "email": "pedroanrdiaz@gmail.com"
+  },
+  "description": "Web app to offer a RESTful API to gleaner-collector",
+  "contributors": [
+    {
+      "name": "Ångel Serrano",
+      "email": "angelserranolaguna@gmail.com"
+    }
+  ],
+  "main": "./lrs.js",
+  "keywords": [
+    "rest",
+    "http",
+    "server",
+    "analytics"
+  ],
+  "dependencies": {
+    "restify": "2.5.x",
+    "mongodb": "1.3.x",
+    "jshashes": "1.0.x",
+    "async": "0.2.x",
+    "mysql": "2.0.0-alpha8",
+    "express": "3.x"
+  },
+  "devDependencies": {},
+  "license": "MIT"
+}
