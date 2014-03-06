@@ -19,7 +19,7 @@ var collector = require('./gleanercollector/collector')();
 	}
 });*/
 
-var testutils = require('./testutils')();
+//var testutils = require('./testutils')();
 
 var http = require('http');
 var path = require('path');
@@ -52,7 +52,7 @@ app.get('/crossdomain.xml', function(request, response) {
 //			i++;
 //		}
 //	console.log(request.headers);
-	request.headers['if-none-match'] = 'no-match-for-this';
+	request.headers['if-none-match'] = 'no-match-for-this';	//To avoid caching the file
 //	console.log(request.headers);
 	response.status(200).sendfile('./crossdomain.xml');
 });

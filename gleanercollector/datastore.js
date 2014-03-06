@@ -25,7 +25,9 @@ var DataStore = function( config ){
 			var splitURI = myURI.split(":");	//The URI will be like mongodb://user:password@troup.mongohq.com:10091/databasename
 			console.log("Remote host: " + splitURI[0] + ':' + splitURI[1] + ':' + splitURI[2]);
 			console.log("Remote port: " + splitURI[3].split("/")[0]);
-			var mongoClient = new MongoClient( new Server(splitURI[0] + ':' + splitURI[1] + ':' + splitURI[2], splitURI[3].split("/")[0]));
+			console.log("");
+			//var mongoClient = new MongoClient( new Server(splitURI[0] + ':' + splitURI[1] + ':' + splitURI[2], splitURI[3].split("/")[0]));	//not working
+			var mongoClient = new MongoClient(myURI);
 		}
 		
 //		var mongoClient = new MongoClient( new Server(config.mongodb.host, config.mongodb.port));		//Original code
