@@ -13,8 +13,25 @@ var DataStore = function( config ){
 	if ( !db ){
 		var MongoClient = require('mongodb').MongoClient,
 			Server = require('mongodb').Server;
-		var mongoClient = new MongoClient( new Server(config.mongodb.host, config.mongodb.port));
+//		var myURI = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || config.mongodb.host + ':' + config.mongodb.port;	//Idea taken from: https://devcenter.heroku.com/articles/getting-started-with-nodejs#using-mongodb
+//		var splitURI = myURI.split(":");	//
+//		console.log("Conecting to the database in: " + myURI);
+		
+		if(!(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL)){
+			var mongoClient = new MongoClient( new Server(config.mongodb.host, config.mongodb.port));
+		}else{
+			var myURI = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
+			console.log("Conecting to the remote database in: " + myURI);
+			var splitURI = myURI.split(":");	//The URI will be like mongodb://user:password@troup.mongohq.com:10091/databasename
+			console.log("Remote host: " + splitURI[0] + ':' + splitURI[1] + ':' + splitURI[2]);
+			console.log("Remote port: " + splitURI[3].split("/")[0]);
+			var mongoClient = new MongoClient( new Server(splitURI[0] + ':' + splitURI[1] + ':' + splitURI[2], splitURI[3].split("/")[0]));
+		}
+		
+//		var mongoClient = new MongoClient( new Server(config.mongodb.host, config.mongodb.port));		//Original code
 		mongoClient.open( function( err, mongoClient ){
+			if (err)
+				console.log("Unable to connect to the remote server. Error: " + err);
 			db = mongoClient.db(config.mongodb.database);
 			initCollections( db );
 		});
