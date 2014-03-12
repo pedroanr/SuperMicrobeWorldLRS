@@ -1,12 +1,12 @@
 {
-  "name": "gleaner-collector-server",
+  "name": "Super-Microbe-World-LRSr",
   "preferGlobal": false,
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": {
     "name": "Pedro Rodriguez",
     "email": "pedroanrdiaz@gmail.com"
   },
-  "description": "Web app to offer a RESTful API to gleaner-collector",
+  "description": "Web app to offer a RESTful API to gleaner-collector, adapted to track the SuperMicrobeWorld game",
   "contributors": [
     {
       "name": "Ångel Serrano",
@@ -27,6 +27,7 @@
     "async": "0.2.x",
     "mysql": "2.0.0-alpha8",
     "express": "3.x"
+    "jade": "1.3.x"
   },
   "devDependencies": {},
   "license": "MIT"
