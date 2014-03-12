@@ -40,7 +40,7 @@ var DataStore = function( config ){
 			MongoClient.connect(myURI, function (err, database) {
 				if (err) throw err;
 				db = database;
-				if (db) console.log("Datastore.js: The database client has started the connection. Connected to database: " + db.getName());
+				if (db) console.log("Datastore.js: The database client has started the connection. "/*Connected to database: " + db.getName()*/);
 				else console.log("Datastore.js: The database client could not start the connection. 'db' object not found.");
 				initCollections( db );
 //				users = db.collection("users");
