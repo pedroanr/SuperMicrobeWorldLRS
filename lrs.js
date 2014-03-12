@@ -65,7 +65,7 @@ app.get('/crossdomain.xml', function(request, response) {
 /*^^^^^^^^^^ for testing purposes only ^^^^^^^^^^*/
 
 app.get("*", function(request, response) {
-	  response.end("404!");
+	  response.end("Route not found! 404!");
 	});
 
 app.post('/track', collector.track); //to handle the post of tracks

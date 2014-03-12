@@ -17,8 +17,12 @@ var DataStore = function( config ){
 //		var splitURI = myURI.split(":");	//
 //		console.log("Conecting to the database in: " + myURI);
 		
-		if(!(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL)){
+		if(!(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL)){				//This part of code will be ran when running this server locally without any environmental var like MONGOHQ_URL or MONGOLAB_URI
 			var mongoClient = new MongoClient( new Server(config.mongodb.host, config.mongodb.port));
+			mongoClient.open( function( err, mongoClient ){
+				db = mongoClient.db(config.mongodb.database);
+				initCollections( db );
+			});
 		}else{
 			/*  //not working
 			var myURI = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
