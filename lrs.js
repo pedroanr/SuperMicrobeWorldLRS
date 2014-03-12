@@ -59,8 +59,8 @@ app.get('/crossdomain.xml', function(request, response) {
 
 /*vvvvvvvvvv for testing purposes only vvvvvvvvvv*/
 
-app.get('/test', testutils.returnback);
-app.post('/test', testutils.returnback);
+//app.get('/test', testutils.returnback);
+//app.post('/test', testutils.returnback);
 
 /*^^^^^^^^^^ for testing purposes only ^^^^^^^^^^*/
 
