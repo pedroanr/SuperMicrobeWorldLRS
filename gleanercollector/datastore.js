@@ -36,15 +36,16 @@ var DataStore = function( config ){
 			
 			//Other try. http://stackoverflow.com/questions/20390967/setting-up-mongodb-on-heroku-with-node
 			var myURI = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
+			console.log("Connecting with the following database... " + myURI);
 			MongoClient.connect(myURI, function (err, database) {
 				if (err) throw err;
 				db = database;
+				if (db) console.log("Datastore.js: The database client has started the connection. Connected to database: " + db.getName());
+				else console.log("Datastore.js: The database client could not start the connection. 'db' object not found.");
 				initCollections( db );
 //				users = db.collection("users");
 //				accounts = db.collection("accounts");
 				//var server = app.listen(process.env.PORT || 3000);
-				if (db) console.log("Datastore.js: The database client has started the connection.");
-				else console.log("Datastore.js: The database client could not start the connection. 'db' object not found.");
 			});
 			
 		}
