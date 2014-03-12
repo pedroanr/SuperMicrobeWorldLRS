@@ -40,6 +40,7 @@ var DataStore = function( config ){
 //				accounts = db.collection("accounts");
 				//var server = app.listen(process.env.PORT || 3000);
 				if (db) console.log("Datastore.js: The database client has started the connection.");
+				else console.log("Datastore.js: The database client could not start the connection. 'db' object not found.");
 			});
 			
 		}
