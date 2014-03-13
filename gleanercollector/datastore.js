@@ -36,7 +36,7 @@ var DataStore = function( config ){
 			
 			//Other try. http://stackoverflow.com/questions/20390967/setting-up-mongodb-on-heroku-with-node
 			var myURI = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
-			console.log("Connecting with the database...);
+			console.log("Connecting with the database...");
 			MongoClient.connect(myURI, function (err, database) {
 				if (err) throw err;
 				db = database;
