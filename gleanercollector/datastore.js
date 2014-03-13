@@ -126,7 +126,20 @@ var DataStore = function( config ){
 	 */
 
 	var startSession = function( req, sessionkey, cb ){
-		// Check if it's a valid session key
+		var debugmode = process.env.NODE_ENV !== 'production';
+		//************DEBUG******************
+		if(debugmode){
+			sessions.find().toArray(function(err, docs) {
+				assert = require('assert');
+				assert.equal(null, err);
+		    	//assert.equal(3, docs.length);
+				for(var i=0; i<docs.length;){
+					console.log("Session " + i + ": " + docs[i]);
+				}
+			}
+		}
+		//************DEBUG******************
+			// Check if it's a valid session key
 		sessions.findOne({'sessionkey': sessionkey}, function( err, session ){
 			if ( err ){
 				console.log("*****datastore.startSession******Error 1");
