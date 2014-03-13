@@ -139,7 +139,7 @@ var DataStore = function( config ){
 					console.log("Session " + i + ": " + docs[i]);
 				}
 			});*/
-			collection.find({}).toArray(function(err, docs) {
+			sessions.find({}).toArray(function(err, docs) {
 				if (err) {
 					return console.error(err);
 		        }
