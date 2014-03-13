@@ -126,40 +126,29 @@ var DataStore = function( config ){
 	 */
 
 	var startSession = function( req, sessionkey, cb ){
-		var debugmode = (process.env.NODE_ENV !== 'production');
 		//************DEBUG******************
-		if(debugmode){
-			if(!sessions) console.log("Warning!! 'sessions' object not found!!");
-			/*sessions.find({}).toArray(function(err, docs) {
-				var assert = require('assert');
-				assert.equal(null, err);
-		    	//assert.equal(3, docs.length);
-				var intCount = docs.length;
-				for(var i=0; i<intCount; i++){
-					console.log("Session " + i + ": " + docs[i]);
-				}
-			});*/
-			sessions.find({}).toArray(function(err, docs) {
-				if (err) {
-					return console.error(err);
-		        }
-		        docs.forEach(function(doc) {
-		        	console.log('found document: ', doc);
-		        });
-		      });
-		}
+//		var debugmode = (process.env.NODE_ENV !== 'production');
+//		if(debugmode){
+//			if(!sessions) console.log("Warning!! 'sessions' object not found!!");
+//			sessions.find({}).toArray(function(err, docs) {
+//				if (err) {
+//					return console.error(err);
+//		        }
+//		        docs.forEach(function(doc) {
+//		        	console.log('found document: ', doc);
+//		        });
+//		      });
+//		}
 		//************DEBUG******************
 			// Check if it's a valid session key
 		sessions.findOne({'sessionkey': sessionkey}, function( err, session ){
 			if ( err ){
-				console.log("*****datastore.startSession******Error 1");
 				cb(400);
 			}
 			else if (session && session.enabled ){
 				var authenticator = getAuthenticator(session.authenticator || 'anonymous');
 				authenticator.authenticate( req, function( err, userId ){
 					if ( err ){
-						console.log("*****datastore.startSession******Error 2");
 						cb( err );
 						return;
 					}
@@ -172,14 +161,12 @@ var DataStore = function( config ){
 
 					usersessions.insert(usersession, function( err, results ){
 						if (err) {
-							console.log("*****datastore.startSession******Error 3");
 							cb( err );
 						}
 						else {
 							// Check if the user is active in the same session
 							activeusers.findOne({ userId: userId, usersessionId: session._id }, function ( err, activeuser ){
 								if ( err ){
-									console.log("*****datastore.startSession******Error 4");
 									cb( err );
 								}
 								else {

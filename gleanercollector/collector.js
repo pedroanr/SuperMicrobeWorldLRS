@@ -27,7 +27,7 @@ var GleanerCollector = function( externalConfiguration ){
 			}
 			else {
 				if ( usersessionkey ){
-					console.log("Start request succesfully done!");
+					console.log("Start request from the user " +req.Authorization+ " succesfully done!");
 					res.status(200);
 					/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 					res.send({ sessionKey: usersessionkey });
