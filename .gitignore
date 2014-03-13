@@ -11,6 +11,8 @@ pids
 logs
 results
 
+
 npm-debug.log
 node_modules
+scripts
 SMB_push_heroku.sh

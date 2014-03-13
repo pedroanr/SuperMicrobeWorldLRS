@@ -20,25 +20,20 @@ var DataStore = function( config ){
 		if(!(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL)){				//This part of code will be ran when running this server locally without any environmental var like MONGOHQ_URL or MONGOLAB_URI
 			var mongoClient = new MongoClient( new Server(config.mongodb.host, config.mongodb.port));
 			mongoClient.open( function( err, mongoClient ){
+				console.log("Connecting with the LOCAL database...");
 				db = mongoClient.db(config.mongodb.database);
 				initCollections( db );
 			});
 		}else{
-			/*  //not working
+			//Idea here: http://stackoverflow.com/questions/20390967/setting-up-mongodb-on-heroku-with-node
 			var myURI = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
-			console.log("Conecting to the remote database in: " + myURI);
-			var splitURI = myURI.split(":");	//The URI will be like mongodb://user:password@troup.mongohq.com:10091/databasename
-			console.log("Remote host: " + splitURI[0] + ':' + splitURI[1] + ':' + splitURI[2]);
-			console.log("Remote port: " + splitURI[3].split("/")[0]);
-			console.log("");
-			var mongoClient = new MongoClient( new Server(splitURI[0] + ':' + splitURI[1] + ':' + splitURI[2], splitURI[3].split("/")[0]));	
-			*/
-			
-			//Other try. http://stackoverflow.com/questions/20390967/setting-up-mongodb-on-heroku-with-node
-			var myURI = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
-			console.log("Connecting with the database...");
+			//NOTE that this part of the code can't be run locally from the GCU net, because of firewall issues. 
+			console.log("Connecting with the online MONGOHQ database...");
 			MongoClient.connect(myURI, function (err, database) {
-				if (err) throw err;
+				if (err) {
+					console.error("Error in the connection!");
+					throw err;
+				}
 				db = database;
 				if (db) console.log("Datastore.js: The database client has started the connection. "/*Connected to database: " + db.getName()*/);
 				else console.log("Datastore.js: The database client could not start the connection. 'db' object not found.");
