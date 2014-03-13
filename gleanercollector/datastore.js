@@ -130,7 +130,7 @@ var DataStore = function( config ){
 		//************DEBUG******************
 		if(debugmode){
 			if(!sessions) console.log("Warning!! 'sessions' object not found!!");
-			sessions.find().toArray(function(err, docs) {
+			/*sessions.find({}).toArray(function(err, docs) {
 				var assert = require('assert');
 				assert.equal(null, err);
 		    	//assert.equal(3, docs.length);
@@ -138,7 +138,15 @@ var DataStore = function( config ){
 				for(var i=0; i<intCount; i++){
 					console.log("Session " + i + ": " + docs[i]);
 				}
-			});
+			});*/
+			collection.find({}).toArray(function(err, docs) {
+				if (err) {
+					return console.error(err);
+		        }
+		        docs.forEach(function(doc) {
+		        	console.log('found document: ', doc);
+		        });
+		      });
 		}
 		//************DEBUG******************
 			// Check if it's a valid session key
