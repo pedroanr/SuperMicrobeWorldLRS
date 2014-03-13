@@ -129,12 +129,14 @@ var DataStore = function( config ){
 		// Check if it's a valid session key
 		sessions.findOne({'sessionkey': sessionkey}, function( err, session ){
 			if ( err ){
+				console.log("*****datastore.startSession******Error 1");
 				cb(400);
 			}
 			else if (session && session.enabled ){
 				var authenticator = getAuthenticator(session.authenticator || 'anonymous');
 				authenticator.authenticate( req, function( err, userId ){
 					if ( err ){
+						console.log("*****datastore.startSession******Error 2");
 						cb( err );
 						return;
 					}
@@ -147,12 +149,14 @@ var DataStore = function( config ){
 
 					usersessions.insert(usersession, function( err, results ){
 						if (err) {
+							console.log("*****datastore.startSession******Error 3");
 							cb( err );
 						}
 						else {
 							// Check if the user is active in the same session
 							activeusers.findOne({ userId: userId, usersessionId: session._id }, function ( err, activeuser ){
 								if ( err ){
+									console.log("*****datastore.startSession******Error 4");
 									cb( err );
 								}
 								else {
