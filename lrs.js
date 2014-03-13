@@ -65,8 +65,14 @@ app.get('/crossdomain.xml', function(request, response) {
 /*^^^^^^^^^^ for testing purposes only ^^^^^^^^^^*/
 
 app.get("*", function(request, response) {
-	  response.end("Route not found! 404!");
-	});
+	console.log("****************** 404 *******************");
+	console.log("Headers of the request: " + request.headers);
+	console.log("Route: " + request.route);
+	console.log("Original URL: " + request.originalUrl);
+	console.log("Subdomains: " + request.subdomains);
+	console.log("******************************************");
+	response.end("Route not found! 404!");
+});
 
 app.post('/track', collector.track); //to handle the post of tracks
 //app.post('/getround', collector.getround);	//To return the xml for the rounds and track the beginning of the quiz level
