@@ -22,6 +22,7 @@ var GleanerCollector = function( externalConfiguration ){
 		dataStore.startSession( req, sessionkey, function( err, usersessionkey ){
 			if (err){
 				console.log("*******collector.start********Unauthorized start request...");
+				console.log(err);
 				res.send(401);
 			}
 			else {

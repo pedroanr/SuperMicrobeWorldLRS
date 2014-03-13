@@ -129,6 +129,7 @@ var DataStore = function( config ){
 		var debugmode = (process.env.NODE_ENV !== 'production');
 		//************DEBUG******************
 		if(debugmode){
+			if(!sessions) console.log("Warning!! 'sessions' object not found!!");
 			sessions.find().toArray(function(err, docs) {
 				var assert = require('assert');
 				assert.equal(null, err);
