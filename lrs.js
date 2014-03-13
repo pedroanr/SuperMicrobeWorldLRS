@@ -54,6 +54,7 @@ app.get('/crossdomain.xml', function(request, response) {
 //	console.log(request.headers);
 	request.headers['if-none-match'] = 'no-match-for-this';	//To avoid caching the file
 //	console.log(request.headers);
+	console.log("Serving crossdomain.xml...");
 	response.status(200).sendfile('./crossdomain.xml');
 });
 
