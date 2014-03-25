@@ -36,26 +36,27 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-
+//app.use('/', express.static(path.join(__dirname, 'game'))); /*---new----*/
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+//app.get('/', routes.index);
+app.get('/', function(request, response) {
+	console.log("Serving build.html...");
+	response.status(200).sendfile('./public/game/build.html');
+});
 app.post('/start/:gamekey', collector.start);
 app.get('/users', user.list);
 app.get('/crossdomain.xml', function(request, response) {
-//		var i = 0;
-//		for(var header in request.headers){
-//			console.log("Header " + i + ": " + header);
-//			i++;
-//		}
-//	console.log(request.headers);
 	request.headers['if-none-match'] = 'no-match-for-this';	//To avoid caching the file
-//	console.log(request.headers);
 	console.log("Serving crossdomain.xml...");
 	response.status(200).sendfile('./crossdomain.xml');
+});
+app.get('/build.unity3d', function(request, response) {
+	console.log("Serving build.unity3d...");
+	response.status(200).sendfile('./public/game/build.unity3d');
 });
 
 /*vvvvvvvvvv for testing purposes only vvvvvvvvvv*/
@@ -64,16 +65,6 @@ app.get('/crossdomain.xml', function(request, response) {
 //app.post('/test', testutils.returnback);
 
 /*^^^^^^^^^^ for testing purposes only ^^^^^^^^^^*/
-
-//app.get("*", function(request, response) {
-//	console.log("****************** 404 *******************");
-//	console.log("Headers of the request: " + request.headers);
-//	console.log("Route: " + request.route);
-//	console.log("Original URL: " + request.originalUrl);
-//	console.log("Subdomains: " + request.subdomains);
-//	console.log("******************************************");
-//	response.end("Route not found! 404!");
-//});
 
 app.post('/track', collector.track); //to handle the post of tracks
 //app.post('/getround', collector.getround);	//To return the xml for the rounds and track the beginning of the quiz level
