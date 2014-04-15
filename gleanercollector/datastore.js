@@ -24,7 +24,7 @@ var DataStore = function( config ){
 				db = mongoClient.db(config.mongodb.database);
 				initCollections( db );
 			});
-		}else{
+		}else{			//If the URI of the database (containing the user, password and address of the database) have been found in the environment variable MONGOHQ_URL we will connect to that database
 			//Idea here: http://stackoverflow.com/questions/20390967/setting-up-mongodb-on-heroku-with-node
 			var myURI = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
 			//NOTE that this part of the code can't be run locally from the GCU net, because of firewall issues. 
