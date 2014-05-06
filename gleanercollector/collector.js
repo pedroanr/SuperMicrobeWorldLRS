@@ -96,7 +96,8 @@ var GleanerCollector = function( externalConfiguration ){
 		} );
 	};
 	
-	// Track the start of a quiz level and returns the questions 
+	// Track the start of a quiz level and returns the questions
+	//Finally is not used, but is kept here just in case is needed in the future.
 	var getround = function(req, res){
 		dataStore.checkSessionKey( req.headers.authorization, function( err, usersessionId ){
 			if (err || !usersessionId){

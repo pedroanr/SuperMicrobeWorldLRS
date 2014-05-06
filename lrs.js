@@ -52,7 +52,7 @@ app.get('/users', user.list);
 app.get('/crossdomain.xml', function(request, response) {
 	request.headers['if-none-match'] = 'no-match-for-this';	//To avoid caching the file
 	console.log("Serving crossdomain.xml...");
-	response.status(200).sendfile('./crossdomain.xml');
+	response.status(200).sendfile('./crossdomain.xml');		//Unity needs a crossdomain document to connect with any net service
 });
 app.get('/build.unity3d', function(request, response) {
 	console.log("Serving build.unity3d...");
