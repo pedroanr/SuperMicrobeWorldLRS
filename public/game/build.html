@@ -17,7 +17,9 @@
 			var config = {
 				width: 960, 
 				height: 600,
-				params: { enableDebugging:"0" }
+				params: { 
+					enableDebugging:"0", 
+					disableFullscreen: true}	<!--Added to avoid playing the game fullscreen-->
 				
 			};
 			var u = new UnityObject2(config);
